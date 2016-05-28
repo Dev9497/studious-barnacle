@@ -1,0 +1,124 @@
+<!Doctype HTML>
+<html>
+<body>
+
+<head>
+<style>
+body{background-color: lightgrey;}
+	
+h1{
+	text-align:centre;
+	font-family: ariel black;
+}
+p{
+	text-align:centre
+	font-family: ariel black;
+}
+
+#day {
+    border: 6px solid black;
+    padding: 10px;
+    margin: 30px;
+}
+#hour {
+    border: 6px solid black;
+    padding: 10px;
+    margin: 30px;
+}
+#minute {
+    border: 6px solid black;
+    padding: 10px;
+    margin: 30px;
+}
+#second {
+    border: 6px solid black;
+    padding: 10px;
+    margin: 30px;
+}
+
+</style>
+</head>
+
+<h1 style="color:blue"> Welcome to the online countdown timer. </h1>
+
+<p style="color:blue">What is the event you are setting the timer for?:</p>
+
+<input id="event">
+
+<p id="demo"></p>
+
+<button type="button" onclick="document.getElementById('demo').innerHTML='Great!'">Submit</button>
+
+<p style="color:blue"> Enter the duration of the event in days,hours, minutes and seconds</p>
+<p style="color:blue">Days: <input type="number" id="d"></p>
+<p style="color:blue">Hours: <input type="number" id="h"></p>
+<p style="color:blue">Minutes: <input type="number" id="m"></p>
+<p style="color:blue">Seconds: <input type="number" id="s"><br><br> 
+
+<button type="button"
+onclick="initialize()">OK!</button> <br> <br>
+
+<button type="button" 
+onclick="getTimeInterval()">Start</button>
+
+<button type="button"
+onclick="stopTimer()">Stop</button>
+
+<br>
+
+<p>Days remaining: </p>
+<p id="day"></p>
+<p>Hours remaining: </p>
+<p id="hour"></p>
+<p>Minutes remaining: </p>
+<p id="minute"></p>
+<p>Seconds remaining: </p>
+<p id="second"></p>
+
+
+<script>
+
+var t,myVar;
+
+function initialize(){
+	var days,hours,seconds,minutes;
+	days=document.getElementById("d").value;
+	hours=document.getElementById("h").value;
+	minutes=document.getElementById("m").value;
+	seconds=document.getElementById("s").value;
+	document.getElementById("day").innerHTML=days;
+	document.getElementById("hour").innerHTML=hours;
+	document.getElementById("minute").innerHTML=minutes;
+	document.getElementById("second").innerHTML=seconds;
+	var ms=(document.getElementById("d").value*24*60*60*1000) + (document.getElementById("h").value*60*60*1000) + (document.getElementById("m").value*60*1000) + (document.getElementById("s").value*1000);
+	t = ms + Date.parse(new Date());
+
+}
+      
+function  getTimeInterval()
+{
+	
+	function displayTime(){
+		var x=t-Date.parse(new Date());
+		var seconds = Math.floor((x / 1000) % 60);
+ 		var minutes= Math.floor((x / 1000 / 60) % 60);
+ 		var hours=Math.floor((x / (1000 * 60 * 60)) % 24);
+ 		var days=Math.floor(x / (1000 * 60 * 60 * 24)); 
+		document.getElementById("day").innerHTML=days;
+		document.getElementById("hour").innerHTML=hours;
+		document.getElementById("minute").innerHTML=minutes;
+		document.getElementById("second").innerHTML=seconds; 
+		
+	}
+	displayTime();
+	myVar=setInterval(function(){displayTime()},1000);
+	
+}
+
+
+function stopTimer(){
+       window.clearInterval(myVar);
+}
+</script>
+</body>
+</html>
